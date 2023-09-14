@@ -1,0 +1,22 @@
+{
+  "name": "@rs-box/ez-bundle",
+  "version": "1.0.0",
+  "description": "Given a json file, it performs a search for its keys in a target directory taken as input.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rstanziale/ez-bundle.git"
+  },
+  "keywords": [
+    "javascript",
+    "json",
+    "i18n",
+    "grep"
+  ],
+  "scripts": {
+    "test": "node index.js bundle.json src/"
+  },
+  "main": "index.js",
+  "type": "module",
+  "author": "Roberto B. Stanziale",
+  "license": "MIT"
+}
