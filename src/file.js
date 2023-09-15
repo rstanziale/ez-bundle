@@ -38,13 +38,14 @@ const readJSON = (fileName) => {
  * Create file with item list not present in directory target
  * @param {string[]} list
  * @param {string} directoryTarget
+ * @param {string} extensions
  */
-const createFileWithMissingEntries = (list, directoryTarget) => {
+const createFileWithMissingEntries = (list, directoryTarget, extensions) => {
   logger("Starting process...");
   const stream = createWriteStream("entries-not-used.txt", { flags: "a" });
   try {
     list.forEach((item) => {
-      const occurences = execGrep(item, directoryTarget);
+      const occurences = execGrep(item, directoryTarget, extensions);
       if (occurences === 0) {
         stream.write(item + "\n");
       }
