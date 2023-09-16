@@ -1,10 +1,8 @@
-import { argv, exit } from "node:process";
-import {
-  createFileWithMissingEntries,
-  flattenJSON,
-  readJSON,
-} from "./src/file.js";
-import { logger } from "./src/util.js";
+const { argv, exit } = require("node:process");
+const { createWriteStream } = require("fs");
+const { execGrep } = require("./src/command.js");
+const { flattenJSON, readJSON } = require("./src/file.js");
+const { logger } = require("./src/util.js");
 
 // Check bundle argument
 const jsonFile = argv[2];
@@ -33,4 +31,19 @@ const list = flattenJSON(json);
 logger(`Number of keys: ${list.length}`);
 
 // Perform research
-createFileWithMissingEntries(list, directoryTarget, extensions);
+logger("Starting process...");
+const FILE_NAME = "entries-not-used.txt";
+const stream = createWriteStream(FILE_NAME, { flags: "a" });
+try {
+  list.forEach((item) => {
+    const occurences = execGrep(item, directoryTarget, extensions);
+    if (occurences === 0) {
+      stream.write(item + "\n");
+    }
+  });
+} catch (error) {
+  logger(error, "ERROR");
+} finally {
+  logger("End process!");
+  stream.end();
+}

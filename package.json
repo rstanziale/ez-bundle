@@ -16,7 +16,6 @@
     "test": "node index.js bundle.json src/"
   },
   "main": "index.js",
-  "type": "module",
   "author": "Roberto B. Stanziale",
   "license": "MIT"
 }
