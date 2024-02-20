@@ -13,7 +13,7 @@
     "grep"
   ],
   "scripts": {
-    "test": "node index.js bundle.json src/"
+    "test": "node index.js bundle.json target/"
   },
   "main": "index.js",
   "author": "Roberto B. Stanziale",

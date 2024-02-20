@@ -28,15 +28,19 @@ if (!extensions) {
 // Create list of keys to research
 const json = readJSON(jsonFile);
 const list = flattenJSON(json);
+
 logger(`Number of keys: ${list.length}`);
 
 // Perform research
 logger("Starting process...");
+
 const FILE_NAME = "entries-not-used.txt";
-const stream = createWriteStream(FILE_NAME, { flags: "a" });
+const stream = createWriteStream(FILE_NAME, { flags: "w" });
+
 try {
   list.forEach((item) => {
     const occurences = execGrep(item, directoryTarget, extensions);
+
     if (occurences === 0) {
       stream.write(item + "\n");
     }
